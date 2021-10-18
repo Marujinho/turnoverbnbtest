@@ -24,7 +24,7 @@ class StorePurchaseRequest extends FormRequest
     public function rules()
     {
         return [
-           'amount' => 'required|max:22|regex:/^-?[0-9]+(?:\.[0-9]{1,2})?$/',
+           'amount' => 'required|gt:0|max:22|regex:/^-?[0-9]+(?:\.[0-9]{1,2})?$/',
            'description' => 'required|string'
         ];
     }

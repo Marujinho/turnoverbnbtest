@@ -25,7 +25,7 @@ class StoreDepositRequest extends FormRequest
     {
         return [
            'check'  => 'required|file|mimes:jpeg,jpg,png|max:10000',
-           'amount' => 'required|max:22|regex:/^-?[0-9]+(?:\.[0-9]{1,2})?$/',
+           'amount' => 'required|gt:0|max:22|regex:/^-?[0-9]+(?:\.[0-9]{1,2})?$/',
            'description' => 'required|string'
         ];
     }
