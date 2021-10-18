@@ -26,7 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         $user = Auth::user();
         $user_bank = $this->user->getUserBank($user);
         $user_data = $this->user->prepareUserData($user_bank);

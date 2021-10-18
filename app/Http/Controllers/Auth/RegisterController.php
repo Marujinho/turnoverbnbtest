@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Domain\User\User;
+use Domain\Bank\Bank;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -70,8 +71,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $user->banks()->attach(1);
-        $user->current_bank = 1;
+        $bank = Bank::first();
+        $user->banks()->attach($bank->id);
+        $user->current_bank = $bank->id;
         $user->save();
 
         return $user;

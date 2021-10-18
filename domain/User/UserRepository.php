@@ -5,7 +5,6 @@ namespace Domain\User;
 
 class UserRepository
 {
-
     protected $model;
 
     /**
