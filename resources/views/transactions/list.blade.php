@@ -29,7 +29,7 @@
                               @foreach($transactions as $transaction)
                                   <tr>
                                       <td>{{ $transaction->type }}</td>
-                                      <td>{{ $transaction->amount }}</td>
+                                      <td>{{ $transaction->type == 'purchase' ? ' - ' : '' }}{{ $transaction->amount }}</td>
                                       <td>{{ $transaction->description }}</td>
                                       <td>{{ $transaction->authorization_status }}</td>
                                       <td>{{ $transaction->created_at }}</td>

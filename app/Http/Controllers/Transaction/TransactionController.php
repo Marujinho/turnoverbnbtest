@@ -122,18 +122,12 @@ class TransactionController extends Controller
             return redirect()->route('transaction.purchase')->withErrors("You don't have enough balance to complete this transaction");
         }
 
-        // $extra_data = ['bank_id' => $user->current_bank, 'relationship_id' => $user_bank->pivot->id];
-        // $request_data = array_merge($request->toArray(), $extra_data);
         $request->bank_id = $user->current_bank;
         $request->relationship_id = $user_bank->pivot->id;
 
-        //job aqui
-        // ProcessPurchase::dispatch($request_data, $user_bank);
         $this->transaction->storePurchase($request);
         $new_balance = $this->balance->subtractBalance($user_bank->pivot->balance, $request->amount);
         $this->balance->updateBalance($user_bank, $new_balance);
-
-        //$user_data = $this->user->prepareUserData($user_bank);
 
         return redirect()->route('transaction.purchase')->with('success', 'Transaction has been completed successfully');
     }
@@ -185,7 +179,6 @@ class TransactionController extends Controller
         $authorized = $this->transaction->authorize($request->authorization, $transaction);
 
         if($authorized) {
-            //job aqui
             $transaction_user_id = $transaction->bankUser()->first()->user_id;
             $transaction_user = $this->user->getUser($transaction_user_id);
             $transaction_user_bank = $this->user->getUserBank($transaction_user);
